@@ -1,5 +1,23 @@
 {
-  "name": "developing-backbonejs-apps",
+  "name": "backbone-node",
+  "description": "developing backbonejs apps with node backend",
+  "keywords": [
+    "backbone",
+    "node",
+    "nodejs",
+    "tutorial",
+    "learn",
+    "app"
+  ],
+  "author": {
+    "name": "Gabriel M",
+    "email": "gmajivu@gmail.com",
+    "url": "https://twitter.com/GabrielMajivu"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gabeno/backbone_node.git"
+  },
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,6 +25,8 @@
   },
   "dependencies": {
     "express": "3.4.0",
-    "jade": "*"
+    "jade": "1.1.4",
+    "jquery": "~2.1.0-beta2",
+    "backbone": "~1.1.0"
   }
 }
