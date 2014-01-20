@@ -109,3 +109,42 @@ var TodoView = Backbone.View.extend({
 var todoView = new TodoView();
 
 console.log(todoView.el);
+
+// ---------------------------------------------------------------------------------------*
+//                                        Collections
+// ---------------------------------------------------------------------------------------*
+
+var TodosCollection = Backbone.Collection.extend({
+  model: Todo
+});
+
+// // listen on events: add, remove, change
+// TodosCollection.on('add', function(todo) {
+//   console.log('Model: '+ todo.get('title') +'added to collection!');
+// });
+
+// TodosCollection.on('remove', function(todo) {
+//   console.log('Model: '+ todo.get('title') +'removed to collection!');
+// });
+
+// TodosCollection.on('change:title', function(todo) {
+//   console.log('Title : '+ todo.get('title') +'for model changed.');
+// });
+
+var todos = new TodosCollection([todo, todo1, todo2]);
+
+console.log('Collection size: ', todos.length);
+
+// add a model to a collection
+var todo3 = new Todo({ title: 'My Life is good!' });
+todos.add(todo3);
+console.log('Collection size: ', todos.length);
+
+// remove a model from a collection
+todos.remove(todo3);
+console.log('Collection size: ', todos.length);
+
+// retrieve model using model id and change its props
+var model1 = todos.get(todo1.cid);
+console.log(model1);
+model1.set('title', 'Smart people read the star');
