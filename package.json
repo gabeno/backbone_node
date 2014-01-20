@@ -26,7 +26,7 @@
   "dependencies": {
     "express": "3.4.0",
     "jade": "1.1.4",
-    "jquery": "~2.1.0-beta2",
+    "jquery": "~2.1.0-rc1",
     "backbone": "~1.1.0",
     "lodash": "~2.4.1",
     "underscore": "~1.5.2"
