@@ -28,6 +28,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/basics', routes.basics);
+app.get('/todo-app', routes.todo);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
