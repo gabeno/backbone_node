@@ -148,3 +148,58 @@ console.log('Collection size: ', todos.length);
 var model1 = todos.get(todo1.cid);
 console.log(model1);
 model1.set('title', 'Smart people read the star');
+
+// ---------------------------------------------------------------------------------------*
+//                                        Events
+// ---------------------------------------------------------------------------------------*
+
+var myObj = {};
+
+_.extend(myObj, Backbone.Events);
+
+// all event provides motification for all events that occurs on the object
+myObj.on('all', function(eventName) {
+  console.log('The name of the event passed was, %s', eventName);
+});
+
+myObj.on('ready', function(msg) {
+  console.log('We triggered %s.', msg);
+});
+
+myObj.trigger('ready', 'our event');
+
+// listeners
+function dancing(msg) { console.log('We started %s', msg); }
+function jumping(msg) { console.log('We are jumping %s', msg); }
+
+// add namespaced events
+myObj.on('dance:tap', dancing);
+myObj.on('dance:break', dancing);
+myObj.on('dance:slide', dancing);
+
+myObj.trigger('dance:tap', 'tap dancing, yeah!');
+myObj.trigger('dance:break', 'break dancing, woohoo!');
+myObj.trigger('dance:slide', 'sliiiidiing, woohoo!');
+myObj.trigger('dance', 'just dancing.'); // triggers nothing as there is no listener for it
+
+// remove callback fns that were previously bound to an object
+myObj.off('dance:tap');
+myObj.trigger('dance:tap', 'tap dancing, yeah!'); // won't be logged
+
+// multiple listeners on one event
+myObj.on('move', dancing);
+myObj.on('move', jumping);
+
+myObj.trigger('move', 'Oh yeah, move event here.');
+
+// remove specified listener
+myObj.off('move', dancing);
+
+// only one listener left
+myObj.trigger('move', 'Oh yeah, jump, jump!');
+
+// trigger multiple events
+myObj.trigger('dance:tap dance:slide', 'just a whole dance');
+
+// passing multiple arguments to multiple events
+myObj.trigger('dance:tap dance:slide', 'just a tap', 'just a slide');
