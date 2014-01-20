@@ -1,17 +1,15 @@
 var
-  Backbone = require('backbone'),
-  $ = require('jquery/dist/jquery');
-  // _ = require('underscore');
-  // browserify = require('browserify');
-  // _ = require('lodash/dist/lodash.underscore');
-
-// var b = browserify();
-// b.require('lodash/dist/lodash.underscore', { expose: '_' });
+  $ = require('jquery'),
+  // _ = require('underscore'),
+  _ = require('lodash/dist/lodash.underscore'),
+  Backbone = require('backbone');
 
 Backbone.$ = $;
 console.log(Backbone);
 
-// Models
+// ---------------------------------------------------------------------------------------*
+//                                        Models
+// ---------------------------------------------------------------------------------------*
 
 var Todo = Backbone.Model.extend({
   defaults: {
@@ -79,3 +77,35 @@ console.log('_pairs: convert an object to list of key, value pairs -> ', todo2.p
 console.log('_invert: swap key, value -> ', todo2.invert());
 console.log('_pick: return copy of object filtered w/ only whitelisted props -> ', todo2.pick('title'));
 console.log('_omit: return copy of object filtered to omit blacklisted props -> ', todo2.omit('title'));
+
+// ---------------------------------------------------------------------------------------*
+//                                        Views
+// ---------------------------------------------------------------------------------------*
+
+var TodoView = Backbone.View.extend({
+  tagName: 'li',
+  todoTpl: _.template('An example template'),
+
+  // DOM events of interest to us, regarding this view
+  events: {
+    'dblclick label': 'edit',
+    'keypress .edit': 'updateOnEnter',
+    'blur .edit': 'close'
+  },
+
+  render: function() {
+    this.$el.html(this.todoTpl(this.model.toJSON())); // this.$el == $(view.el)
+    this.input = this.$('.edit'); // this.$('.edit') == $(view.el).find('.edit')
+    return this;
+  },
+
+  edit: function() {},
+
+  close: function() {},
+
+  updateOnEnter: function() {}
+});
+
+var todoView = new TodoView();
+
+console.log(todoView.el);
