@@ -14,3 +14,7 @@ exports.basics = function(req, res) {
 exports.todo = function(req, res) {
   res.render('todo', { title: 'Todo App' });
 };
+
+exports.hello = function(req, res) {
+  res.render('hello-backbone', { title: 'Hello Backbone.JS' });
+};
