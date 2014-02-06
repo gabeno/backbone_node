@@ -5,7 +5,7 @@ var watch = require('gulp-watch');
 var eslint = require('gulp-eslint');
 
 gulp.task('test', function() {
-  gulp.src(['tests/**/*.js'])
+  gulp.src(['tests/**/*.js', 'hello-backbone/**/*.js'])
     .pipe(watch(function(files) {
       return files
         .pipe(eslint())
