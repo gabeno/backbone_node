@@ -1,7 +1,26 @@
-extends layout
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/styles/todo-app.css')
+  body
+    h1= title
+    p Todo App 
+      a(href='http://addyosmani.github.io/backbone-fundamentals/#exercise-1-todos---your-first-backbone.js-app') book 
+      a(href='https://github.com/tastejs/todomvc/tree/gh-pages/architecture-examples/backbone') raw
 
-block content
-  h1= title
-  p Todo App 
-    a(href='http://addyosmani.github.io/backbone-fundamentals/#exercise-1-todos---your-first-backbone.js-app') source
-  script(src='../js/basics.js')
+    section(id='todoapp')
+      header(id='header')
+        h1 Todos
+        input(id='new-todo', placeholder='what needs to be done', autofocus)
+      section(id='main')
+        input(id='toggle-all', type='checkbox')
+        label(for='toggle-all') Mark all as complete
+        ul(id='todo-list')
+      footer(id='footer')
+
+    div(id='info')
+      p Double-click to edit a todo
+      p Written by 
+        a(href='https://github.com/addyosmani') Addy Osmani
+    script(src='../js/todo-app.js')
