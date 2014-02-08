@@ -3,18 +3,27 @@ var gutil = require('gulp-util');
 var mocha = require('gulp-mocha');
 var watch = require('gulp-watch');
 var eslint = require('gulp-eslint');
+// var notify = require('gulp-notify');
 
-gulp.task('test', function() {
-  gulp.src(['tests/**/*.js', 'hello-backbone/**/*.js'])
-    .pipe(watch(function(files) {
-      return files
+// error handler
+function handler(err) {
+  if (err && /test?s failed/.test(err.message))
+    gutil.log(err.message);
+}
+
+gulp.task('watch', function() {
+  return gulp.src(['tests/**/*.js', 'hello-backbone/**/*.js'])
+    .pipe(watch({ emit: 'all', name: 'hello-backbone' }, function(files) {
+      files
         .pipe(eslint())
-        .pipe(eslint.format())
+        .pipe(eslint.format('stylish'))
         .pipe(mocha({ reporter: 'spec' }))
-        .on('error', gutil.log);
+        // .pipe(notify('files linted and tested :)'))
+        .on('error', handler);
     }));
 });
 
-// gulp.task('default', function() {
-//   // some code here
-// });
+gulp.task('default', ['watch']);
+
+// gutil.log => [gulp] message...
+// console.log => message...
