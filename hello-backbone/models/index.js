@@ -23,6 +23,10 @@ var Item = Backbone.Model.extend({
     if (attrs.hasOwnProperty('done') && !_.isBoolean(attrs.done)) {
       return 'Todo.done must be a boolean value';
     }
+  },
+
+  toggle: function() {
+    this.set({ done: !this.get('done') });
   }
 });
 

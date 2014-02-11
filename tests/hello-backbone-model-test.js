@@ -1,5 +1,3 @@
-// hello-backbone-model-test.js
-
 'use strict';
 
 var expect = require('chai').expect;
@@ -72,5 +70,13 @@ describe('Backbone.Model', function() {
     expect(callback).to.be.calledOnce;
     expect(todo.get('text')).to.be.undefined;
     expect(todo.has('text')).to.be.false;
+  });
+
+  it('can toggle the completed status of the model', function() {
+    var todo = new Todo();
+
+    expect(todo.get('done')).to.be.false;
+    todo.toggle();
+    expect(todo.get('done')).to.be.true;
   });
 });
