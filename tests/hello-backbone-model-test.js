@@ -57,8 +57,8 @@ describe('Todo Model', function() {
     // http://backbonejs.org/#Events
     // "invalid" (model, error, options) — when a model's validation fails on the client.
     expect(errorCallback.getCall(0).args[0]).to.eql(todo); // 1st arg: model
-    expect(errorCallback.getCall(0).args[1]).to.eql('Todo.done must be a boolean value');
-    expect(errorCallback.getCall(0).args[2].validate).to.be.true;
+    expect(errorCallback.getCall(0).args[1]).to.eql('Todo.done must be a boolean value'); // 2nd arg
+    expect(errorCallback.getCall(0).args[2].validate).to.be.true; // 3rd arg
   });
 
   it('can unset an attribute', function() {
