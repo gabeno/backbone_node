@@ -5,6 +5,7 @@ var expect = chai.expect;
 var sinon = require('sinon');
 var sinonChai = require('sinon-chai');
 
+var Todo = require('../hello-backbone/models');
 var TodoList = require('../hello-backbone/collections');
 
 chai.use(sinonChai);
@@ -64,5 +65,17 @@ describe('Backbone.Collection', function() {
     expect(removeModelCallback).to.have.been.calledOnce;
 
     // collection.set(models, [options]) => test this?
+  });
+
+  it('should order models by priority', function() {
+    var todo1 = new Todo({ text: 'Get a birthday card for my wifey', priority: 2 });
+    var todo2 = new Todo({ text: 'Take Snowy the dog out for a walk', priority: 3 });
+    var todo3 = new Todo({ text: 'Call plumber to fix broken pipe', priority: 1 });
+
+    var todos = new TodoList([ todo1, todo2, todo3 ]);
+
+    expect(todos.at(0)).to.equal(todo3);
+    expect(todos.at(1)).to.equal(todo1);
+    expect(todos.at(2)).to.equal(todo2);
   });
 });

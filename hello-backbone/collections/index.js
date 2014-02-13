@@ -10,7 +10,11 @@ var Todo = require('../models');
 var TodoList = Backbone.Collection.extend({
   model: Todo,
 
-  url: '/todos/'
+  url: '/todos/',
+
+  comparator: function(todo) {
+    return todo.get('priority');
+  }
 });
 
 module.exports = TodoList;
