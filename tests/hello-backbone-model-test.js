@@ -9,25 +9,25 @@ var Todo = require('../hello-backbone/models/');
 
 chai.use(sinonChai);
 
-describe('Backbone.Model', function() {
+describe('Todo Model', function() {
 
-  it('can be created with default values', function() {
+  it('is created with default values', function() {
     var todo = new Todo();
 
     expect(todo.get('text')).to.equal('');
     expect(todo.get('done')).to.be.false;
     expect(todo.get('order')).to.equal(0);
+    expect(todo.get('priority')).to.equal(0);
   });
 
-  it('will set attributes on the model instance when created', function() {
-    var todo = new Todo({ text: 'clear pending emails' });
+  it('sets attributes on the model instance when created', function() {
+    var todo = new Todo({ text: 'clear pending emails', priority: 2 });
 
     expect(todo.get('text')).to.equal('clear pending emails');
-    expect(todo.get('done')).to.be.false;
-    expect(todo.get('order')).to.equal(0);
+    expect(todo.get('priority')).to.equal(2);
   });
 
-  it('will call a custom initialize function on the model instance when created', function() {
+  it('calls a custom initialize function on the model instance when created', function() {
     var todo = new Todo({ text: 'proof read draft blog article' });
 
     expect(todo.get('text')).to.equal('proof read draft blog post');
@@ -51,11 +51,12 @@ describe('Backbone.Model', function() {
     todo.set('done', 'true', { validate: true });
 
     expect(todo.validationError).to.equal('Todo.done must be a boolean value');
+
     expect(errorCallback).to.have.been.called;
     expect(errorCallback.getCall(0)).to.not.equal(undefined);
     // http://backbonejs.org/#Events
     // "invalid" (model, error, options) — when a model's validation fails on the client.
-    expect(errorCallback.getCall(0).args[0]).to.eql(todo);
+    expect(errorCallback.getCall(0).args[0]).to.eql(todo); // 1st arg: model
     expect(errorCallback.getCall(0).args[1]).to.eql('Todo.done must be a boolean value');
     expect(errorCallback.getCall(0).args[2].validate).to.be.true;
   });

@@ -11,7 +11,8 @@ var Item = Backbone.Model.extend({
     return {
       text: '',
       done: false,
-      order: 0
+      order: 0,
+      priority: 0
     }
   },
 
